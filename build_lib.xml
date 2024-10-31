@@ -1,0 +1,24 @@
+<project name="MyProject" basedir="." default="jar">
+    <!-- Define directories for convenience -->
+    <property name="src.dir" value="codegen_java"/>
+    <property name="classes.dir" value="classes"/>
+    <property name="dist.dir" value="dist"/>
+
+    <!-- Clean task -->
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile task -->
+    <target name="compile" depends="clean">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+    </target>
+
+    <!-- Jar task -->
+    <target name="jar" depends="compile">
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/container_classes.jar" basedir="${classes.dir}"/>
+    </target>
+</project>
