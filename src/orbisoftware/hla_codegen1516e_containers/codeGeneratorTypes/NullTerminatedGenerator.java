@@ -124,7 +124,7 @@ public class NullTerminatedGenerator {
 		depthIncSpace();
 		
 		System.out.println(indentFormat + "// Fields");
-		System.out.println(indentFormat + "public String value = new String();");
+		System.out.println(indentFormat + "public String value = new String(\"" + "#" + "\");");
 		
 		System.out.println();
 		System.out.println(indentFormat + "// Constructor");
