@@ -13,7 +13,7 @@
     <!-- Compile task -->
     <target name="compile" depends="clean">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" source="17" target="17" includeantruntime="false"/>
     </target>
 
     <!-- Jar task -->
