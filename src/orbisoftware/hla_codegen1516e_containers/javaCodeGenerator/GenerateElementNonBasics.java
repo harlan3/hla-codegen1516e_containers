@@ -80,6 +80,11 @@ public class GenerateElementNonBasics {
 				generateArrayClasses(baseNode, elementType, elementName, value);
 				break;
 				
+			case "SimpleDatatype":
+				if (value.entryType.equals("HLAASCIIstringImp"))
+					implementPrefixedStringLength(baseNode, elementType, elementName, value);
+				break;
+				
 			case "FixedRecord":
 				implementFixedRecord(baseNode, elementType, elementName, value);
 				break;
@@ -189,6 +194,31 @@ public class GenerateElementNonBasics {
 			System.out.println("   }");
 			System.out.println("}");
 			System.out.println();
+
+			// Remove entry from ledger after processing
+			NonBasicTypeLedger.getInstance().nonBasicTypeLedger.remove(value.entryID);
+
+		} catch (Exception e) {
+		}
+	}
+	
+	private void implementPrefixedStringLength(Node baseNode, ElementType elementType, String elementName, LedgerEntry value) {
+		
+		try {
+			final String prefixedStringLengthString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
+					elementType.toString() + "s" + 
+					File.separator + elementName + File.separator + "PrefixedStringLength";
+			File prefixedStringLengthDir = new File(System.getProperty("user.dir") + File.separator + prefixedStringLengthString);
+
+			PrintStream outputStream = new PrintStream(
+					new File(prefixedStringLengthDir + File.separator + value.entryType + ".java"));
+			PrintStream console = System.out;
+			System.setOut(outputStream);
+		
+			PrefixedStringLengthGenerator prefixedStringLengthGenerator = new PrefixedStringLengthGenerator(value);
+			prefixedStringLengthGenerator.setDefaults();
+
+			prefixedStringLengthGenerator.generateClass(elementName, elementType, value);
 
 			// Remove entry from ledger after processing
 			NonBasicTypeLedger.getInstance().nonBasicTypeLedger.remove(value.entryID);
