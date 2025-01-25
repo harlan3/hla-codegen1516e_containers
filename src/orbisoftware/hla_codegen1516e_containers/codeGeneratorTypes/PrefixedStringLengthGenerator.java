@@ -124,9 +124,9 @@ public class PrefixedStringLengthGenerator {
 		System.out.println(indentFormat + "public class " + ledgerEntry.entryType + " {");
 		System.out.println();
 		depthIncSpace();
-		
+
 		System.out.println(indentFormat + "// Fields");
-		System.out.println(indentFormat + "public String value = new String();");
+		System.out.println(indentFormat + "public String value = new String(\"" + "#" + "\");");
 		System.out.println();
 		
 		System.out.println(indentFormat + "// Constructor");
