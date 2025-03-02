@@ -80,11 +80,6 @@ public class GenerateElementNonBasics {
 				generateArrayClasses(baseNode, elementType, elementName, value);
 				break;
 				
-			case "SimpleDatatype":
-				if (value.entryType.equals("HLAASCIIstringImp"))
-					implementPrefixedStringLength(baseNode, elementType, elementName, value);
-				break;
-				
 			case "FixedRecord":
 				implementFixedRecord(baseNode, elementType, elementName, value);
 				break;
@@ -105,7 +100,10 @@ public class GenerateElementNonBasics {
 			break;
 
 		case "HLAvariableArray":
-			implementVariableArray(baseNode, elementType, elementName, value);
+			if (value.entryType.equals("HLAASCIIstringImp"))
+				implementPrefixedStringLength(baseNode, elementType, elementName, value);
+			else
+				implementVariableArray(baseNode, elementType, elementName, value);
 			break;
 
 		case "RPRlengthlessArray":
