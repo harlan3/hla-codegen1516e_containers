@@ -166,21 +166,4 @@ public class Utilities {
 
 		return returnVal;
 	}
-
-	// Method to align the offset to the nearest multiple of alignment
-	public int align(int offset, int alignment) {
-
-		int returnVal = (offset + alignment - 1) & ~(alignment - 1);
-		return returnVal;
-	}
-
-	// Method to insert padding into the buffer
-	public void insertPadding(DynamicBuffer buffer, int offset, int alignment) {
-		int alignedOffset = align(offset, alignment);
-		int paddingSize = alignedOffset - offset;
-
-		for (int i = 0; i < paddingSize; i++) {
-			buffer.put((byte) 0x00); // Insert padding bytes (0x00)
-		}
-	}
 }
