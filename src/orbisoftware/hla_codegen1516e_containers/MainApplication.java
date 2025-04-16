@@ -96,7 +96,7 @@ public class MainApplication {
 		codeGeneratorJava.generateEnumPlaceHolderFile();
 		codeGeneratorJava.generateMiscPlaceHolderFile();
 		
-		hlaPathBuilder.generateDatabase(fomFilename, elementModel, "Cont");
+		hlaPathBuilder.generateDatabase(fomFilename, elementModel, "Cont", false);
 		
 		codeGeneratorJava.generateCode();
 		
