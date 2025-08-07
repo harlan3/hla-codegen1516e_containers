@@ -105,7 +105,8 @@ public class PaddingArrayGenerator {
 		
 		String primitiveClass;
 		
-		System.out.println("package " + Utilities.packageRoot + "Misc;");	
+		System.out.println("package " + Utilities.packageRoot + "Common.Misc;");
+		
 		System.out.println();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");

@@ -104,19 +104,11 @@ public class VariableArrayType2Generator {
 
 	public void generateClass(String elementClassname, ElementType elementType, LedgerEntry value) {
 
-		String elementReference = "";
-		
-		if (elementType == ElementType.Object) {
-			System.out.println("package " + Utilities.packageRoot + "Objects." + elementClassname + ".VariableArrays;");
-			elementReference = "Objects";
-		} else {
-			System.out.println("package " + Utilities.packageRoot + "Interactions." + elementClassname + ".VariableArrays;");
-			elementReference = "Interactions";
-		}
+		System.out.println("package " + Utilities.packageRoot + "Common.VariableArrays;");
 
 		System.out.println();
 
-		CodeGeneratorJava.printCommonImports(elementReference, elementClassname);
+		CodeGeneratorJava.printCommonImports();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
 		System.out.println("public class " + ledgerEntry.entryType + " {");

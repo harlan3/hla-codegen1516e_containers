@@ -128,8 +128,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String fixedRecordsString = "codegen_java" + File.separator + Utilities.packageRootDir +
-					File.separator + elementType.toString() + "s" +
-					File.separator + elementName + File.separator + "FixedRecords";
+					File.separator + "Common" + File.separator + "FixedRecords";
 			File fixedRecordsDir = new File(System.getProperty("user.dir") + File.separator + fixedRecordsString);
 
 			FixedRecordGenerator fixedRecordGenerator = new FixedRecordGenerator(value);
@@ -167,8 +166,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String variantRecordsString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
-					elementType.toString() + "s" +
-					File.separator + elementName + File.separator + "VariantRecords";
+					"Common" + File.separator + "VariantRecords";
 			File variantRecordsDir = new File(System.getProperty("user.dir") + File.separator + variantRecordsString);
 		
 			VariantRecordGenerator variantRecordGenerator = new VariantRecordGenerator(value);
@@ -204,8 +202,7 @@ public class GenerateElementNonBasics {
 		
 		try {
 			final String prefixedStringLengthString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
-					elementType.toString() + "s" + 
-					File.separator + elementName + File.separator + "PrefixedStringLength";
+					File.separator + "Common" + File.separator + "PrefixedStringLength";
 			File prefixedStringLengthDir = new File(System.getProperty("user.dir") + File.separator + prefixedStringLengthString);
 
 			PrintStream outputStream = new PrintStream(
@@ -230,8 +227,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String variableArraysString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
-					elementType.toString() + "s" + 
-					File.separator + elementName + File.separator + "VariableArrays";
+					File.separator + "Common" + File.separator + "VariableArrays";
 			File variableArraysDir = new File(System.getProperty("user.dir") + File.separator + variableArraysString);
 
 			PrintStream outputStream = new PrintStream(
@@ -275,8 +271,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String lengthlessString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
-					elementType.toString() + "s" + 
-					File.separator + elementName + File.separator + "LengthlessArrays";
+					File.separator + "Common" + File.separator + "LengthlessArrays";
 			File lengthlessArraysDir = new File(System.getProperty("user.dir") + File.separator + lengthlessString);
 
 			PrintStream outputStream = new PrintStream(
@@ -321,7 +316,7 @@ public class GenerateElementNonBasics {
 			LedgerEntry value) {
 
 		try {
-			final String miscString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Misc";
+			final String miscString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Common" + File.separator + "Misc";
 			File miscDir = new File(System.getProperty("user.dir") + File.separator + miscString);
 
 			PrintStream outputStream = new PrintStream(
@@ -358,8 +353,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String fixedArraysString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + 
-					elementType.toString() + "s" +
-					File.separator + elementName + File.separator + "FixedArrays";
+					File.separator + "Common" + File.separator + "FixedArrays";
 			File fixedArraysDir = new File(System.getProperty("user.dir") + File.separator + fixedArraysString);
 
 			PrintStream outputStream = new PrintStream(
@@ -393,8 +387,7 @@ public class GenerateElementNonBasics {
 
 		try {
 			final String nullTerminatedString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + 
-					elementType.toString() + "s" +
-					File.separator + elementName + File.separator + "NullTerminatedArrays";
+					"Common" + File.separator + "NullTerminatedArrays";
 			File nullTerminatedDir = new File(System.getProperty("user.dir") + File.separator + nullTerminatedString);
 
 			PrintStream outputStream = new PrintStream(
