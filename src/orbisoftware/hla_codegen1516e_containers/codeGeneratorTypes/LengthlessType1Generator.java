@@ -109,7 +109,7 @@ public class LengthlessType1Generator {
 		CodeGeneratorJava.printCommonImports();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
-		System.out.println("public class " + ledgerEntry.entryType + " {");
+		System.out.println("public class " + ledgerEntry.entryType + "_Cont {");
 		System.out.println();
 	}
 
@@ -127,7 +127,7 @@ public class LengthlessType1Generator {
 		System.out.println();
 		
 		System.out.println(indentFormat + "// Constructor");
-		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "()" + " {");
+		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "_Cont()" + " {");
 		System.out.println();
 		
 		System.out.println(indentFormat + "}");

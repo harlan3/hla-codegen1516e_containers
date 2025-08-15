@@ -121,18 +121,18 @@ public class FixedArrayType2Generator {
 		CodeGeneratorJava.printCommonImports();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
-		System.out.println("public class " + ledgerEntry.entryType + " {");
+		System.out.println("public class " + ledgerEntry.entryType + "_Cont {");
 		
 		depthIncSpace();
 		
 		String nativeClass = ledgerEntry.entryClassType;
 		
 		System.out.println();
-		System.out.println(indentFormat + "public " + nativeClass + "[] value = new " + 
-				nativeClass + "[" + ledgerEntry.entryCardinality + "];");
+		System.out.println(indentFormat + "public " + nativeClass + "_Cont[] value = new " + 
+				nativeClass + "_Cont[" + ledgerEntry.entryCardinality + "];");
 		System.out.println();
 		System.out.println(indentFormat + "// Constructor");
-		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "()" + " {");
+		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "_Cont()" + " {");
 		System.out.println();
 		
 		depthIncSpace();
@@ -141,7 +141,7 @@ public class FixedArrayType2Generator {
 		
 		depthIncSpace();
 		
-		System.out.println(indentFormat + "value[i] = new " + nativeClass + "();");
+		System.out.println(indentFormat + "value[i] = new " + nativeClass + "_Cont();");
 		
 		depthDecSpace();
 		depthDecSpace();

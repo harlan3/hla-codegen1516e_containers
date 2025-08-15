@@ -46,29 +46,29 @@ public class CodeGeneratorJava {
 	private int indentSpace;
 	private ArrayList<String> attributesList = new ArrayList<>();
 	private ArrayList<String> parametersList = new ArrayList<>();
-	
+
 	private GenerateElementNonBasics generateElementNonBasics = new GenerateElementNonBasics();
 	private Utilities utilities = new Utilities();
-	
+
 	int nodeDepth;
-	
+
 	private String indentFormat = "";
-	
+
 	private void setDefaults() {
 
 		indentSpace = 0;
 		nodeDepth = 0;
 	}
-	
+
 	private void depthIncSpace() {
 		indentSpace = indentSpace + 3;
-		
+
 		if (indentSpace > 0)
 			indentFormat = String.format("%" + (indentSpace) + "s", "");
 	}
-	
+
 	private void depthCurSpace() {
-		
+
 		if (indentSpace > 0)
 			indentFormat = String.format("%" + (indentSpace) + "s", "");
 	}
@@ -78,25 +78,22 @@ public class CodeGeneratorJava {
 
 		if (indentSpace < 1)
 			indentSpace = 0;
-		
+
 		if (indentSpace > 0)
 			indentFormat = String.format("%" + (indentSpace) + "s", "");
 	}
-	
+
 	public void createRootDirectories() {
 
 		try {
 			File codegenDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir);
-			File codeGenObjDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator +
-					Utilities.packageRootDir + File.separator + "Objects");
-			File codeGenIntDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator + 
-					Utilities.packageRootDir + File.separator + "Interactions");
-			File commonDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator + 
-					Utilities.packageRootDir + File.separator + "Common");
-			
+			File codeGenObjDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir
+					+ File.separator + Utilities.packageRootDir + File.separator + "Objects");
+			File codeGenIntDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir
+					+ File.separator + Utilities.packageRootDir + File.separator + "Interactions");
+			File commonDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator
+					+ Utilities.packageRootDir + File.separator + "Common");
+
 			if (Files.exists(codegenDir.toPath()))
 				FileUtils.forceDelete(codegenDir);
 
@@ -104,9 +101,9 @@ public class CodeGeneratorJava {
 			FileUtils.forceMkdir(codeGenObjDir);
 			FileUtils.forceMkdir(codeGenIntDir);
 			FileUtils.forceMkdir(commonDir);
-			
-			final String enumsString = code_gen_dir + File.separator + Utilities.packageRootDir + 
-					File.separator + "Common" + File.separator + "Enums";
+
+			final String enumsString = code_gen_dir + File.separator + Utilities.packageRootDir + File.separator
+					+ "Common" + File.separator + "Enums";
 			File enumsDir = new File(System.getProperty("user.dir") + File.separator + enumsString);
 
 			if (Files.exists(enumsDir.toPath()))
@@ -114,23 +111,23 @@ public class CodeGeneratorJava {
 
 			FileUtils.forceMkdir(enumsDir);
 
-			final String miscString = code_gen_dir + File.separator + Utilities.packageRootDir +
-					File.separator  + "Common" + File.separator + "Misc";
+			final String miscString = code_gen_dir + File.separator + Utilities.packageRootDir + File.separator
+					+ "Common" + File.separator + "Misc";
 			File miscDir = new File(System.getProperty("user.dir") + File.separator + miscString);
 
 			if (Files.exists(miscDir.toPath()))
 				FileUtils.forceDelete(miscDir);
 
 			FileUtils.forceMkdir(miscDir);
-			
+
 		} catch (Exception e) {
 		}
 	}
-	
+
 	public void printHeader1(ElementType elementType, String elementName) {
 
 		String elementReference = "";
-		
+
 		if (elementType == ElementType.Object) {
 			System.out.println("package " + Utilities.packageRoot + "Objects." + elementName + ";");
 			elementReference = "Objects";
@@ -145,9 +142,9 @@ public class CodeGeneratorJava {
 		System.out.println();
 		CodeGeneratorJava.printCommonImports();
 	}
-	
+
 	public static void printCommonImports() {
-		
+
 		System.out.println("import " + Utilities.packageRoot + "Common.Enums.*;");
 		System.out.println("import " + Utilities.packageRoot + "Common.FixedArrays.*;");
 		System.out.println("import " + Utilities.packageRoot + "Common.FixedRecords.*;");
@@ -158,9 +155,9 @@ public class CodeGeneratorJava {
 		System.out.println("import " + Utilities.packageRoot + "Common.VariantRecords.*;");
 		System.out.println("import " + Utilities.packageRoot + "Common.Misc.*;");
 		System.out.println();
-		
-		//System.out.println("import orbisoftware.hla_codegen1516e.*;");
-		//System.out.println();
+
+		// System.out.println("import orbisoftware.hla_codegen1516e.*;");
+		// System.out.println();
 	}
 
 	public void parseAttributes(Node node) {
@@ -218,14 +215,14 @@ public class CodeGeneratorJava {
 			}
 		}
 	}
-	
+
 	private void populateNonBasicTypeLedger(Node node) {
-		
+
 		nodeDepth++;
-		
+
 		// Depth 4 are the attributes/parameters
 		if (nodeDepth >= 4) {
-			
+
 			NamedNodeMap attributes = node.getAttributes();
 			String nodeText = attributes.getNamedItem("TEXT").toString().replaceAll("TEXT=\"", "").replaceAll("\"", "");
 			Utils utils = new Utils();
@@ -236,28 +233,33 @@ public class CodeGeneratorJava {
 				dataFieldName = utils.lowercaseFirstLetter(dataFieldName);
 			}
 			String primitiveType = utils.getPrimitiveFromEncodingType(nodeSplit[0]);
-			
+
 			// This is a non primitive type that needs to be added to the ledger
 			if (primitiveType.equals("Unknown")) {
-				
+
 				LedgerEntry ledgerEntry = new LedgerEntry();
-				
-				ledgerEntry.entryID = attributes.getNamedItem("ID").toString().replaceAll("ID=\"", "").replaceAll("\"", "");
+
+				ledgerEntry.entryID = attributes.getNamedItem("ID").toString().replaceAll("ID=\"", "").replaceAll("\"",
+						"");
 				ledgerEntry.entryType = nodeSplit[0];
 				ledgerEntry.entryDataField = dataFieldName;
-				ledgerEntry.entryTID = attributes.getNamedItem("TID").toString().replaceAll("TID=\"", "").replaceAll("\"", ""); 
-				
+				ledgerEntry.entryTID = attributes.getNamedItem("TID").toString().replaceAll("TID=\"", "")
+						.replaceAll("\"", "");
+
 				if (ledgerEntry.entryTID.equals("Array")) {
-					
-					ledgerEntry.entryClassType = attributes.getNamedItem("classtype").toString().replaceAll("classtype=\"", "").replaceAll("\"", "");
-					ledgerEntry.entryCardinality = attributes.getNamedItem("cardinality").toString().replaceAll("cardinality=\"", "").replaceAll("\"", "");
-					ledgerEntry.entryEncoding = attributes.getNamedItem("encoding").toString().replaceAll("encoding=\"", "").replaceAll("\"", "");
+
+					ledgerEntry.entryClassType = attributes.getNamedItem("classtype").toString()
+							.replaceAll("classtype=\"", "").replaceAll("\"", "");
+					ledgerEntry.entryCardinality = attributes.getNamedItem("cardinality").toString()
+							.replaceAll("cardinality=\"", "").replaceAll("\"", "");
+					ledgerEntry.entryEncoding = attributes.getNamedItem("encoding").toString()
+							.replaceAll("encoding=\"", "").replaceAll("\"", "");
 				}
-				
+
 				NonBasicTypeLedger.getInstance().nonBasicTypeLedger.put(ledgerEntry.entryID, ledgerEntry);
 			}
 		}
-		
+
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node currentNode = nodeList.item(i);
@@ -266,48 +268,47 @@ public class CodeGeneratorJava {
 				populateNonBasicTypeLedger(currentNode);
 			}
 		}
-		
+
 		nodeDepth--;
 	}
-	
+
 	private void generateClassFields(Node node) {
-		
+
 		nodeDepth++;
-		
+
 		// Depth 4 are the attributes/parameters
 		if (nodeDepth == 4) {
-			
+
 			NamedNodeMap attributes = node.getAttributes();
-			String nodeText = 
-					attributes.getNamedItem("TEXT").toString().replaceAll("TEXT=\"", "").replaceAll("\"", "");
+			String nodeText = attributes.getNamedItem("TEXT").toString().replaceAll("TEXT=\"", "").replaceAll("\"", "");
 			Utils utils = new Utils();
 			String nodeSplit[] = nodeText.split(" ");
 			String dataFieldName = "";
 			if (nodeSplit.length > 1) {
 				dataFieldName = utils.convertToCamelCase(nodeSplit[1]);
 			} else {
-				int x=0;
+				int x = 0;
 				x++;
 			}
-				
+
 			String primitiveType = utils.getPrimitiveFromEncodingType(nodeSplit[0]);
-			
+
 			depthCurSpace();
-			
+
 			// Is not a primitive
 			if (primitiveType.equals("Unknown") && !dataFieldName.equals("")) {
 
-				System.out.println(indentFormat + "public " + nodeSplit[0] + " " +
-						dataFieldName + " = new " + nodeSplit[0] + "();");
-								
+				System.out.println(indentFormat + "public " + nodeSplit[0] + "_Cont " + dataFieldName + " = new "
+						+ nodeSplit[0] + "_Cont();");
+
 			} else {
-				
-				System.out.println(indentFormat + "public " + primitiveType + " " + 
-						dataFieldName + " = " + utilities.primitiveAssignment(primitiveType) + ";");
-				
+
+				System.out.println(indentFormat + "public " + primitiveType + " " + dataFieldName + " = "
+						+ utilities.primitiveAssignment(primitiveType) + ";");
+
 			}
 		}
-		
+
 		NodeList nodeList = node.getChildNodes();
 		for (int i = 0; i < nodeList.getLength(); i++) {
 			Node currentNode = nodeList.item(i);
@@ -316,7 +317,7 @@ public class CodeGeneratorJava {
 				generateClassFields(currentNode);
 			}
 		}
-		
+
 		nodeDepth--;
 	}
 
@@ -324,7 +325,7 @@ public class CodeGeneratorJava {
 
 		boolean found = false;
 		String classHandle = "";
-		
+
 		NamedNodeMap attrList = node.getAttributes();
 
 		for (int i = 0; i < attrList.getLength(); i++) {
@@ -385,7 +386,7 @@ public class CodeGeneratorJava {
 		NamedNodeMap attrList = node.getAttributes();
 
 		depthCurSpace();
-		
+
 		System.out.println(indentFormat + "Level = " + indentSpace / 3);
 
 		for (int i = 0; i < attrList.getLength(); i++) {
@@ -405,18 +406,19 @@ public class CodeGeneratorJava {
 		}
 		depthDecSpace();
 	}
-	
+
 	public void generateEnumPlaceHolderFile() {
 
 		try {
-			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Common" + File.separator + "Enums";
+			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir
+					+ File.separator + "Common" + File.separator + "Enums";
 			File generatedTypeDir = new File(System.getProperty("user.dir") + File.separator + generatedTypeString);
 
 			PrintStream outputStream = new PrintStream(
 					new File(generatedTypeDir + File.separator + "PlaceHolderEnums.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
-			
+
 			System.out.println("package " + Utilities.packageRoot + "Enums;");
 			System.out.println();
 			System.out.println("public class PlaceHolderEnums {");
@@ -424,25 +426,26 @@ public class CodeGeneratorJava {
 			System.out.println("   public PlaceHolderEnums() {}");
 			System.out.println("");
 			System.out.println("}");
-			
+
 			System.setOut(console);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void generateMiscPlaceHolderFile() {
 
 		try {
-			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Common" + File.separator + "Misc";
+			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir
+					+ File.separator + "Common" + File.separator + "Misc";
 			File generatedTypeDir = new File(System.getProperty("user.dir") + File.separator + generatedTypeString);
 
 			PrintStream outputStream = new PrintStream(
 					new File(generatedTypeDir + File.separator + "PlaceHolderMisc.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
-			
+
 			System.out.println("package " + Utilities.packageRoot + "Misc;");
 			System.out.println();
 			System.out.println("public class PlaceHolderMisc {");
@@ -450,27 +453,27 @@ public class CodeGeneratorJava {
 			System.out.println("   public PlaceHolderMisc() {}");
 			System.out.println("");
 			System.out.println("}");
-			
+
 			System.setOut(console);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	void generatePlaceHolderFiles(String generatedType) {
 
 		try {
 			// Fixed Record
-			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + 
-					"Common" + File.separator + generatedType;
+			final String generatedTypeString = "codegen_java" + File.separator + Utilities.packageRootDir
+					+ File.separator + "Common" + File.separator + generatedType;
 			File generatedTypeDir = new File(System.getProperty("user.dir") + File.separator + generatedTypeString);
 
 			PrintStream outputStream = new PrintStream(
 					new File(generatedTypeDir + File.separator + "PlaceHolder" + generatedType + ".java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
-			
+
 			System.out.println("package " + Utilities.packageRoot + "Common." + generatedType + ";");
 			System.out.println();
 			System.out.println("public class PlaceHolder" + generatedType + " {");
@@ -478,9 +481,9 @@ public class CodeGeneratorJava {
 			System.out.println("   public PlaceHolder" + generatedType + "() {}");
 			System.out.println("");
 			System.out.println("}");
-			
+
 			System.setOut(console);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -496,15 +499,15 @@ public class CodeGeneratorJava {
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
 		try {
-			
+
 			File codegenDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir);
-			File codeGenObjDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator + Utilities.packageRootDir + File.separator + "Objects");
-			File codeGenIntDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator + Utilities.packageRootDir + File.separator + "Interactions");
-			File commonDir = new File(
-					System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator + Utilities.packageRootDir + File.separator + "Common");
-			
+			File codeGenObjDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir
+					+ File.separator + Utilities.packageRootDir + File.separator + "Objects");
+			File codeGenIntDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir
+					+ File.separator + Utilities.packageRootDir + File.separator + "Interactions");
+			File commonDir = new File(System.getProperty("user.dir") + File.separator + code_gen_dir + File.separator
+					+ Utilities.packageRootDir + File.separator + "Common");
+
 			File codegenFixedArraysDir = new File(commonDir + File.separator + "FixedArrays");
 			File codegenFixedRecordsDir = new File(commonDir + File.separator + "FixedRecords");
 			File codegenLengthlessArraysDir = new File(commonDir + File.separator + "LengthlessArrays");
@@ -512,7 +515,7 @@ public class CodeGeneratorJava {
 			File codegenPrefixedStringLengthDir = new File(commonDir + File.separator + "PrefixedStringLength");
 			File codegenVariableArraysDir = new File(commonDir + File.separator + "VariableArrays");
 			File codegenVariantRecordsDir = new File(commonDir + File.separator + "VariantRecords");
-			
+
 			FileUtils.forceMkdir(codegenFixedArraysDir);
 			FileUtils.forceMkdir(codegenFixedRecordsDir);
 			FileUtils.forceMkdir(codegenLengthlessArraysDir);
@@ -520,7 +523,7 @@ public class CodeGeneratorJava {
 			FileUtils.forceMkdir(codegenPrefixedStringLengthDir);
 			FileUtils.forceMkdir(codegenVariableArraysDir);
 			FileUtils.forceMkdir(codegenVariantRecordsDir);
-			
+
 			// Generate placeholder files
 			generatePlaceHolderFiles("FixedArrays");
 			generatePlaceHolderFiles("FixedRecords");
@@ -529,12 +532,12 @@ public class CodeGeneratorJava {
 			generatePlaceHolderFiles("PrefixedStringLength");
 			generatePlaceHolderFiles("VariableArrays");
 			generatePlaceHolderFiles("VariantRecords");
-			
+
 			for (int i = 0; i < objectArraySize; i++) {
 
 				Utils utils = new Utils();
 				setDefaults();
-				
+
 				File targetObjectDir = new File(codeGenObjDir + File.separator + mmNodeTreeRepository.getObjectName(i));
 				FileUtils.forceMkdir(targetObjectDir);
 
@@ -548,69 +551,70 @@ public class CodeGeneratorJava {
 				NodeTree nodeTree = mmNodeTreeRepository.getNodeTree(mmNodeTreeRepository.getObjectName(i));
 				nodeTree.setDefaults();
 				nodeTree.traverseTree(nodeTree.root, false); // False specifies xml output instead of mindmap output
-				
+
 				int startNodes = nodeTree.getDocMetaDataStartNode();
 				int endNodes = nodeTree.getDocMetaDataEndNode();
 				int diffNodes = startNodes - endNodes;
-				
-				//while (diffNodes > 0) {
-				//	System.out.println("</node>");
-				//	diffNodes--;
-				//}
-				
+
+				// while (diffNodes > 0) {
+				// System.out.println("</node>");
+				// diffNodes--;
+				// }
+
 				System.out.println("</doc>");
 
 				System.setOut(console);
 
 				// Read in the XML file that was just generated
 				DocumentBuilder db4 = dbf.newDocumentBuilder();
-				Document doc4 = db4
-						.parse(new File(targetObjectDir + File.separator + mmNodeTreeRepository.getObjectName(i) + ".xml"));
+				Document doc4 = db4.parse(
+						new File(targetObjectDir + File.separator + mmNodeTreeRepository.getObjectName(i) + ".xml"));
 
 				Node node = doc4.getFirstChild();
-				
+
 				// Parse the attributes for the object
 				parseAttributes(node);
-				
+
 				// Start broilerplate code generation
-				
+
 				PrintStream outputStream3 = new PrintStream(
 						new File(targetObjectDir + File.separator + mmNodeTreeRepository.getObjectName(i) + ".java"));
 				PrintStream console3 = System.out;
 				System.setOut(outputStream3);
-				
+
 				printHeader1(ElementType.Object, mmNodeTreeRepository.getObjectName(i));
 
 				System.out.println("@SuppressWarnings(\"unused\")");
 				System.out.println(("public class " + mmNodeTreeRepository.getObjectName(i)) + " {");
 				System.out.println();
-				
+
 				// Code generation
 				depthIncSpace();
 				System.out.println("   " + "// Fields");
 				generateClassFields(node);
 				System.out.println("");
-				
+
 				System.out.println("   // Constructor");
 				System.out.println("   public " + mmNodeTreeRepository.getObjectName(i) + "() {");
 				System.out.println();
-				
+
 				depthIncSpace();
 				System.out.println("   }");
 				System.out.println("}");
-				
+
 				// Clear ledger if any entries exist
 				NonBasicTypeLedger.getInstance().clearLedger();
-				
+
 				setDefaults();
-				
+
 				// Populate ledger
 				populateNonBasicTypeLedger(node);
-				
+
 				node = doc4.getFirstChild();
-				generateElementNonBasics.generateClasses(node, ElementType.Object, mmNodeTreeRepository.getObjectName(i));
-				//NonBasicTypeLedger.getInstance().displayLedger();
-				
+				generateElementNonBasics.generateClasses(node, ElementType.Object,
+						mmNodeTreeRepository.getObjectName(i));
+				// NonBasicTypeLedger.getInstance().displayLedger();
+
 				System.setOut(console);
 			}
 
@@ -618,15 +622,15 @@ public class CodeGeneratorJava {
 
 				Utils utils = new Utils();
 				setDefaults();
-				
-				File targetInteractionDir = 
-						new File(codeGenIntDir + File.separator + mmNodeTreeRepository.getInteractionName(i));
+
+				File targetInteractionDir = new File(
+						codeGenIntDir + File.separator + mmNodeTreeRepository.getInteractionName(i));
 				FileUtils.forceMkdir(targetInteractionDir);
 
 				// String element = mmNodeTreeRepository.getObjectName(i);
 
-				PrintStream outputStream = new PrintStream(
-						new File(targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".xml"));
+				PrintStream outputStream = new PrintStream(new File(
+						targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".xml"));
 				PrintStream console = System.out;
 				System.setOut(outputStream);
 
@@ -639,17 +643,17 @@ public class CodeGeneratorJava {
 
 				// Read in the XML file that was just generated
 				DocumentBuilder db4 = dbf.newDocumentBuilder();
-				Document doc4 = db4.parse(
-						new File(targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".xml"));
+				Document doc4 = db4.parse(new File(
+						targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".xml"));
 
 				Node node = doc4.getFirstChild();
-				
+
 				// Parse the parameters for the interaction
 				parseParameters(node);
-				
+
 				// Start broilerplate code generation
-				PrintStream outputStream3 = new PrintStream(
-						new File(targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".java"));
+				PrintStream outputStream3 = new PrintStream(new File(
+						targetInteractionDir + File.separator + mmNodeTreeRepository.getInteractionName(i) + ".java"));
 				PrintStream console3 = System.out;
 				System.setOut(outputStream3);
 
@@ -658,24 +662,25 @@ public class CodeGeneratorJava {
 				System.out.println("@SuppressWarnings(\"unused\")");
 				System.out.println(("public class " + mmNodeTreeRepository.getInteractionName(i)) + " {");
 				System.out.println();
-				
+
 				// Code generation
 				depthIncSpace();
 				generateClassFields(node);
-				
+
 				System.out.println("}");
-				
+
 				// Clear ledger if any entries exist
 				NonBasicTypeLedger.getInstance().clearLedger();
 				setDefaults();
-				
+
 				// Populate ledger
 				populateNonBasicTypeLedger(node);
-				
+
 				node = doc4.getFirstChild();
-				generateElementNonBasics.generateClasses(node, ElementType.Interaction, mmNodeTreeRepository.getInteractionName(i));
-				//NonBasicTypeLedger.getInstance().displayLedger();
-				
+				generateElementNonBasics.generateClasses(node, ElementType.Interaction,
+						mmNodeTreeRepository.getInteractionName(i));
+				// NonBasicTypeLedger.getInstance().displayLedger();
+
 				System.setOut(console3);
 			}
 		} catch (Exception e) {

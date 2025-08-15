@@ -119,7 +119,7 @@ public class VariantRecordGenerator {
 		CodeGeneratorJava.printCommonImports();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
-		System.out.println("public class " + ledgerEntry.entryType + " {");
+		System.out.println("public class " + ledgerEntry.entryType + "_Cont {");
 		System.out.println();
 
 		depthIncSpace();
@@ -212,8 +212,8 @@ public class VariantRecordGenerator {
 			}
 
 			if (nonBasicType) {
-				System.out.println(indentFormat + "public " + ledgerEntry.entryType + " " + ledgerEntry.entryDataField + 
-						" = new " + ledgerEntry.entryType + "();");
+				System.out.println(indentFormat + "public " + ledgerEntry.entryType + "_Cont " + ledgerEntry.entryDataField + 
+						" = new " + ledgerEntry.entryType + "_Cont();");
 			} else {
 				System.out.println(indentFormat + "public " + ledgerEntry.entryType + " " + ledgerEntry.entryDataField + 
 						" = " + utilities.primitiveAssignment(ledgerEntry.entryType) + ";");

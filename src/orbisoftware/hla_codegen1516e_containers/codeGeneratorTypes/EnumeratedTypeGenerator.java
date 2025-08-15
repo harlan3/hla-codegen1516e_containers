@@ -95,7 +95,7 @@ public class EnumeratedTypeGenerator {
 			for (DbEnumeratedDatatype var1 : list1) {
 
 				PrintStream outputStream =
-						new PrintStream(new File(enumsDir + File.separator + var1.name + ".java"));
+						new PrintStream(new File(enumsDir + File.separator + var1.name + "_Cont.java"));
 				PrintStream console = System.out;
 				System.setOut(outputStream);
 
@@ -105,7 +105,7 @@ public class EnumeratedTypeGenerator {
 				//System.out.println("import orbisoftware.hla_codegen1516e.*;");
 				//System.out.println();
 				
-				System.out.println("public class " + var1.name + " {");
+				System.out.println("public class " + var1.name + "_Cont {");
 				System.out.println();
 
 				System.out.println("   // Fields");
@@ -114,7 +114,7 @@ public class EnumeratedTypeGenerator {
 				System.out.println();
 				
 				System.out.println("   // Constructor");
-				System.out.println("   public " + var1.name + "() {");
+				System.out.println("   public " + var1.name + "_Cont() {");
 				System.out.println();
 				System.out.println("   }");
 				

@@ -134,7 +134,7 @@ public class GenerateElementNonBasics {
 			FixedRecordGenerator fixedRecordGenerator = new FixedRecordGenerator(value);
 			
 			PrintStream outputStream = new PrintStream(
-					new File(fixedRecordsDir + File.separator + value.entryType + ".java"));
+					new File(fixedRecordsDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -146,7 +146,7 @@ public class GenerateElementNonBasics {
 			System.out.println("");
 			
 			System.out.println("   // Constructor");
-			System.out.println("   public " +  value.entryType + "() {");
+			System.out.println("   public " +  value.entryType + "_Cont() {");
 			System.out.println();
 			System.out.println("   }");
 			System.out.println("}");
@@ -172,7 +172,7 @@ public class GenerateElementNonBasics {
 			VariantRecordGenerator variantRecordGenerator = new VariantRecordGenerator(value);
 
 			PrintStream outputStream = new PrintStream(
-					new File(variantRecordsDir + File.separator + value.entryType + ".java"));
+					new File(variantRecordsDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -185,7 +185,7 @@ public class GenerateElementNonBasics {
 			System.out.println("");
 			
 			System.out.println("   // Constructor");
-			System.out.println("   public " +  value.entryType + "() {");
+			System.out.println("   public " +  value.entryType + "_Cont() {");
 			System.out.println();
 			System.out.println("   }");
 			System.out.println("}");
@@ -206,7 +206,7 @@ public class GenerateElementNonBasics {
 			File prefixedStringLengthDir = new File(System.getProperty("user.dir") + File.separator + prefixedStringLengthString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(prefixedStringLengthDir + File.separator + value.entryType + ".java"));
+					new File(prefixedStringLengthDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 		
@@ -231,7 +231,7 @@ public class GenerateElementNonBasics {
 			File variableArraysDir = new File(System.getProperty("user.dir") + File.separator + variableArraysString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(variableArraysDir + File.separator + value.entryType + ".java"));
+					new File(variableArraysDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -275,7 +275,7 @@ public class GenerateElementNonBasics {
 			File lengthlessArraysDir = new File(System.getProperty("user.dir") + File.separator + lengthlessString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(lengthlessArraysDir + File.separator + value.entryType + ".java"));
+					new File(lengthlessArraysDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -320,7 +320,7 @@ public class GenerateElementNonBasics {
 			File miscDir = new File(System.getProperty("user.dir") + File.separator + miscString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(miscDir + File.separator + value.entryType + ".java"));
+					new File(miscDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -357,7 +357,7 @@ public class GenerateElementNonBasics {
 			File fixedArraysDir = new File(System.getProperty("user.dir") + File.separator + fixedArraysString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(fixedArraysDir + File.separator + value.entryType + ".java"));
+					new File(fixedArraysDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
@@ -391,7 +391,7 @@ public class GenerateElementNonBasics {
 			File nullTerminatedDir = new File(System.getProperty("user.dir") + File.separator + nullTerminatedString);
 
 			PrintStream outputStream = new PrintStream(
-					new File(nullTerminatedDir + File.separator + value.entryType + ".java"));
+					new File(nullTerminatedDir + File.separator + value.entryType + "_Cont.java"));
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 

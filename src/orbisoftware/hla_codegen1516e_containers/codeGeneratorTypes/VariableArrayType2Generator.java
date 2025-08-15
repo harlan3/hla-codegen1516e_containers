@@ -111,25 +111,25 @@ public class VariableArrayType2Generator {
 		CodeGeneratorJava.printCommonImports();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
-		System.out.println("public class " + ledgerEntry.entryType + " {");
+		System.out.println("public class " + ledgerEntry.entryType + "_Cont {");
 		System.out.println();
 		
 		depthIncSpace();
 		
 		System.out.println(indentFormat + "// Fields");
-		System.out.println(indentFormat + "public " + ledgerEntry.entryClassType + "[] value = new " + 
-				ledgerEntry.entryClassType + "[1];");
+		System.out.println(indentFormat + "public " + ledgerEntry.entryClassType + "_Cont[] value = new " + 
+				ledgerEntry.entryClassType + "_Cont[1];");
 		System.out.println();
 		
 		System.out.println(indentFormat + "// Constructor");
-		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "()" + " {");
+		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "_Cont()" + " {");
 		System.out.println();
 		
 		System.out.println(indentFormat + "for (int i=0; i < 1; i++)");
 		
 		depthIncSpace();
 		
-		System.out.println(indentFormat + "value[i] = new " + ledgerEntry.entryClassType + "();");
+		System.out.println(indentFormat + "value[i] = new " + ledgerEntry.entryClassType + "_Cont();");
 		
 		depthDecSpace();
 		depthDecSpace();

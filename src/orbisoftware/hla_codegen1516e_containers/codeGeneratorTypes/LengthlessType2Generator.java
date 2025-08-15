@@ -114,7 +114,7 @@ public class LengthlessType2Generator {
 		System.out.println();
 		
 		System.out.println("@SuppressWarnings(\"unused\")");
-		System.out.println("public class " + ledgerEntry.entryType + " {");
+		System.out.println("public class " + ledgerEntry.entryType + "_Cont {");
 		System.out.println();
 		
 		depthIncSpace();
@@ -128,18 +128,18 @@ public class LengthlessType2Generator {
 		String variableName = utils.convertToCamelCase(nativeClass);
 		
 		System.out.println(indentFormat + "// Fields");
-		System.out.println(indentFormat + "public " + nativeClass + "[] value = new " + nativeClass + "[1];");
+		System.out.println(indentFormat + "public " + nativeClass + "_Cont[] value = new " + nativeClass + "_Cont[1];");
 		System.out.println();
 		
 		System.out.println(indentFormat + "// Constructor");
-		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "()" + " {");
+		System.out.println(indentFormat + "public " + ledgerEntry.entryType + "_Cont()" + " {");
 		System.out.println();
 		
 		System.out.println(indentFormat + "for (int i=0; i < 1; i++)");
 		
 		depthIncSpace();
 		
-		System.out.println(indentFormat + "value[i] = new " + nativeClass + "();");
+		System.out.println(indentFormat + "value[i] = new " + nativeClass + "_Cont();");
 		System.out.println();
 		
 		depthDecSpace();
