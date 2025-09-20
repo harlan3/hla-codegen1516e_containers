@@ -419,7 +419,7 @@ public class CodeGeneratorJava {
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
-			System.out.println("package " + Utilities.packageRoot + "Enums;");
+			System.out.println("package " + Utilities.packageRoot + "Common.Enums;");
 			System.out.println();
 			System.out.println("public class PlaceHolderEnums {");
 			System.out.println();
@@ -446,7 +446,7 @@ public class CodeGeneratorJava {
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
-			System.out.println("package " + Utilities.packageRoot + "Misc;");
+			System.out.println("package " + Utilities.packageRoot + "Common.Misc;");
 			System.out.println();
 			System.out.println("public class PlaceHolderMisc {");
 			System.out.println();
