@@ -113,7 +113,7 @@ public class PrefixedStringLengthGenerator {
 		depthCurSpace();
 		
 		System.out.println(indentFormat + "@SuppressWarnings(\"unused\")");
-		System.out.println(indentFormat + "public class " + ledgerEntry.entryType + " {");
+		System.out.println(indentFormat + "public class " + ledgerEntry.entryType + "_Cont {");
 		System.out.println();
 		depthIncSpace();
 
