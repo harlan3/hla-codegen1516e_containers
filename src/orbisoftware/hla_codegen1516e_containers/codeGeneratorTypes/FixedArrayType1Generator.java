@@ -24,18 +24,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.CodeGeneratorJava;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.LedgerEntry;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
+import orbisoftware.hla_shared.Utilities;
 
 // This array is of primitive type
 public class FixedArrayType1Generator {
 
 	public static int indentSpace;
 	
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	private LedgerEntry ledgerEntry;
 
@@ -104,7 +104,7 @@ public class FixedArrayType1Generator {
 
 	public void generateClass(String elementClassname, ElementType elementType, LedgerEntry value) {
 
-		System.out.println("package " + Utilities.packageRoot + "Common.FixedArrays;");
+		System.out.println("package " + Utilities.containerPackageRoot + "Common.FixedArrays;");
 
 		System.out.println();
 
@@ -115,8 +115,8 @@ public class FixedArrayType1Generator {
 		
 		depthIncSpace();
 		
-		String nativeClass = utils.getClassFromEncodingType(ledgerEntry.entryClassType);
-		String primitiveClass = utils.getPrimitiveFromEncodingType(ledgerEntry.entryClassType);
+		String nativeClass = pathBuilderUtilities.getClassFromEncodingType(ledgerEntry.entryClassType);
+		String primitiveClass = pathBuilderUtilities.getPrimitiveFromEncodingType(ledgerEntry.entryClassType);
 		System.out.println();
 		
 		System.out.println(indentFormat + "// Fields");

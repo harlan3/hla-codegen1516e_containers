@@ -28,19 +28,19 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.LedgerEntry;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
 import orbisoftware.hla_pathbuilder.DatabaseAPI;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
 import orbisoftware.hla_pathbuilder.db_classes.DbEnumeratedDatatype;
 import orbisoftware.hla_pathbuilder.db_classes.DbEnumeratorDatatype;
+import orbisoftware.hla_shared.Utilities;
 
 public class EnumeratedTypeGenerator {
 
 	public static int indentSpace;
 
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	private LedgerEntry ledgerEntry;
 
@@ -82,7 +82,7 @@ public class EnumeratedTypeGenerator {
 
 		try {
 			
-			final String enumsString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Common" + File.separator + "Enums";
+			final String enumsString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator + "Common" + File.separator + "Enums";
 			File enumsDir = new File(System.getProperty("user.dir") + File.separator + enumsString);
 			
 			// Select all enumerated data types
@@ -99,7 +99,7 @@ public class EnumeratedTypeGenerator {
 				PrintStream console = System.out;
 				System.setOut(outputStream);
 
-				System.out.println("package " + Utilities.packageRoot + "Common.Enums;");
+				System.out.println("package " + Utilities.containerPackageRoot + "Common.Enums;");
 	    		System.out.println();
 	    		
 				//System.out.println("import orbisoftware.hla_codegen1516e.*;");
@@ -109,7 +109,7 @@ public class EnumeratedTypeGenerator {
 				System.out.println();
 
 				System.out.println("   // Fields");
-				String internalValue = utils.getPrimitiveFromEncodingType(utils.convertFromRPRType(var1.type));
+				String internalValue = pathBuilderUtilities.getPrimitiveFromEncodingType(pathBuilderUtilities.convertFromRPRType(var1.type));
 				System.out.println("   public " + internalValue + " value = 0;");
 				System.out.println();
 				

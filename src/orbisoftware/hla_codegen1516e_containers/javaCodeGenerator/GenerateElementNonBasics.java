@@ -26,16 +26,16 @@ import java.util.Iterator;
 
 import org.w3c.dom.Node;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.codeGeneratorTypes.*;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
+import orbisoftware.hla_shared.Utilities;
 
 public class GenerateElementNonBasics {
 
 	private int indentSpace = 3;
 	private String indentFormat = "";
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	public void setDefaults() {
 
@@ -127,7 +127,7 @@ public class GenerateElementNonBasics {
 	private void implementFixedRecord(Node baseNode, ElementType elementType, String elementName, LedgerEntry value) {
 
 		try {
-			final String fixedRecordsString = "codegen_java" + File.separator + Utilities.packageRootDir +
+			final String fixedRecordsString = "codegen_java" + File.separator + Utilities.containerPackageRootDir +
 					File.separator + "Common" + File.separator + "FixedRecords";
 			File fixedRecordsDir = new File(System.getProperty("user.dir") + File.separator + fixedRecordsString);
 
@@ -165,7 +165,7 @@ public class GenerateElementNonBasics {
 	private void implementVariantRecord(Node baseNode, ElementType elementType, String elementName, LedgerEntry value) {
 
 		try {
-			final String variantRecordsString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
+			final String variantRecordsString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator +
 					"Common" + File.separator + "VariantRecords";
 			File variantRecordsDir = new File(System.getProperty("user.dir") + File.separator + variantRecordsString);
 		
@@ -201,7 +201,7 @@ public class GenerateElementNonBasics {
 	private void implementPrefixedStringLength(Node baseNode, ElementType elementType, String elementName, LedgerEntry value) {
 		
 		try {
-			final String prefixedStringLengthString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
+			final String prefixedStringLengthString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator +
 					File.separator + "Common" + File.separator + "PrefixedStringLength";
 			File prefixedStringLengthDir = new File(System.getProperty("user.dir") + File.separator + prefixedStringLengthString);
 
@@ -226,7 +226,7 @@ public class GenerateElementNonBasics {
 			LedgerEntry value) {
 
 		try {
-			final String variableArraysString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
+			final String variableArraysString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator +
 					File.separator + "Common" + File.separator + "VariableArrays";
 			File variableArraysDir = new File(System.getProperty("user.dir") + File.separator + variableArraysString);
 
@@ -237,11 +237,11 @@ public class GenerateElementNonBasics {
 
 			String encodingType;
 			
-			if (utils.isPrimitiveHLAClass(value.entryClassType)) {
-				encodingType = utils.getClassFromEncodingType(value.entryClassType);
+			if (pathBuilderUtilities.isPrimitiveHLAClass(value.entryClassType)) {
+				encodingType = pathBuilderUtilities.getClassFromEncodingType(value.entryClassType);
 				value.entryClassType = encodingType;
 			} else {
-				encodingType = utils.getEncodingType(value.entryClassType);
+				encodingType = pathBuilderUtilities.getEncodingType(value.entryClassType);
 			}
 
 			if (!encodingType.equals("Unknown")) { // This array is of primitive type
@@ -270,7 +270,7 @@ public class GenerateElementNonBasics {
 			LedgerEntry value) {
 
 		try {
-			final String lengthlessString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator +
+			final String lengthlessString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator +
 					File.separator + "Common" + File.separator + "LengthlessArrays";
 			File lengthlessArraysDir = new File(System.getProperty("user.dir") + File.separator + lengthlessString);
 
@@ -281,11 +281,11 @@ public class GenerateElementNonBasics {
 
 			String encodingType;
 			
-			if (utils.isPrimitiveHLAClass(value.entryClassType)) {
-				encodingType = utils.getClassFromEncodingType(value.entryClassType);
+			if (pathBuilderUtilities.isPrimitiveHLAClass(value.entryClassType)) {
+				encodingType = pathBuilderUtilities.getClassFromEncodingType(value.entryClassType);
 				value.entryClassType = encodingType;
 			} else {
-				encodingType = utils.getEncodingType(value.entryClassType);
+				encodingType = pathBuilderUtilities.getEncodingType(value.entryClassType);
 			}
 
 			if (!encodingType.equals("Unknown")) { // This array is of primitive type
@@ -316,7 +316,7 @@ public class GenerateElementNonBasics {
 			LedgerEntry value) {
 
 		try {
-			final String miscString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + "Common" + File.separator + "Misc";
+			final String miscString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator + "Common" + File.separator + "Misc";
 			File miscDir = new File(System.getProperty("user.dir") + File.separator + miscString);
 
 			PrintStream outputStream = new PrintStream(
@@ -326,11 +326,11 @@ public class GenerateElementNonBasics {
 
 			String encodingType;
 			
-			if (utils.isPrimitiveHLAClass(value.entryClassType)) {
-				encodingType = utils.getClassFromEncodingType(value.entryClassType);
+			if (pathBuilderUtilities.isPrimitiveHLAClass(value.entryClassType)) {
+				encodingType = pathBuilderUtilities.getClassFromEncodingType(value.entryClassType);
 				value.entryClassType = encodingType;
 			} else {
-				encodingType = utils.getEncodingType(value.entryClassType);
+				encodingType = pathBuilderUtilities.getEncodingType(value.entryClassType);
 			}
 
 			if (!encodingType.equals("Unknown")) { // This array is of primitive type
@@ -352,7 +352,7 @@ public class GenerateElementNonBasics {
 	private void implementFixedArray(Node baseNode, ElementType elementType, String elementName, LedgerEntry value) {
 
 		try {
-			final String fixedArraysString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + 
+			final String fixedArraysString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator + 
 					File.separator + "Common" + File.separator + "FixedArrays";
 			File fixedArraysDir = new File(System.getProperty("user.dir") + File.separator + fixedArraysString);
 
@@ -361,7 +361,7 @@ public class GenerateElementNonBasics {
 			PrintStream console = System.out;
 			System.setOut(outputStream);
 
-			String encodingType = utils.getClassFromEncodingType(value.entryClassType);
+			String encodingType = pathBuilderUtilities.getClassFromEncodingType(value.entryClassType);
 
 			if (!encodingType.equals("Unknown")) { // This array is of primitive type
 				FixedArrayType1Generator fixedArrayType1Generator = new FixedArrayType1Generator(value);
@@ -386,7 +386,7 @@ public class GenerateElementNonBasics {
 			LedgerEntry value) {
 
 		try {
-			final String nullTerminatedString = "codegen_java" + File.separator + Utilities.packageRootDir + File.separator + 
+			final String nullTerminatedString = "codegen_java" + File.separator + Utilities.containerPackageRootDir + File.separator + 
 					"Common" + File.separator + "NullTerminatedArrays";
 			File nullTerminatedDir = new File(System.getProperty("user.dir") + File.separator + nullTerminatedString);
 

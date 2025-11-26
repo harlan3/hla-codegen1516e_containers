@@ -24,18 +24,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.CodeGeneratorJava;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.LedgerEntry;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
+import orbisoftware.hla_shared.Utilities;
 
 // This array is of primitive type
 public class LengthlessType1Generator {
 
 	public static int indentSpace;
 
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	private LedgerEntry ledgerEntry;
 
@@ -104,7 +104,7 @@ public class LengthlessType1Generator {
 
 	public void printHeader(String elementClassname, ElementType elementType, LedgerEntry value) {
 		
-		System.out.println("package " + Utilities.packageRoot + "Common.LengthlessArrays;");
+		System.out.println("package " + Utilities.containerPackageRoot + "Common.LengthlessArrays;");
 
 		CodeGeneratorJava.printCommonImports();
 		
@@ -117,7 +117,7 @@ public class LengthlessType1Generator {
 
 		String primitiveClass;		
 
-		primitiveClass = utils.getPrimitiveFromClass(ledgerEntry.entryClassType);
+		primitiveClass = pathBuilderUtilities.getPrimitiveFromClass(ledgerEntry.entryClassType);
 				
 		depthIncSpace();
 		

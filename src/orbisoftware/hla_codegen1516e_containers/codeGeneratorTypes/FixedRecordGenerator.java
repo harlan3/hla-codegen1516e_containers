@@ -27,18 +27,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.CodeGeneratorJava;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.LedgerEntry;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.NonBasicTypeLedger;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
+import orbisoftware.hla_shared.Utilities;
 
 public class FixedRecordGenerator {
 
 	public static int indentSpace;
 
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	private LedgerEntry ledgerEntry;
 
@@ -112,7 +112,7 @@ public class FixedRecordGenerator {
 
 	public void printHeader(String elementClassName, ElementType elementType) {
 
-		System.out.println("package " + Utilities.packageRoot + "Common.FixedRecords;");
+		System.out.println("package " + Utilities.containerPackageRoot + "Common.FixedRecords;");
 		System.out.println();
 
 		CodeGeneratorJava.printCommonImports();
@@ -169,9 +169,9 @@ public class FixedRecordGenerator {
 							ledgerEntry.entryType = parts[0];
 							ledgerEntry.entryDataField = parts[1];
 						} else {
-							Utils utils = new Utils();
+							PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 							ledgerEntry.entryType = text;
-							ledgerEntry.entryDataField = utils.convertToCamelCase(text);
+							ledgerEntry.entryDataField = pathBuilderUtilities.convertToCamelCase(text);
 						}
 						break;
 
@@ -202,7 +202,7 @@ public class FixedRecordGenerator {
 			boolean nonBasicType = false;
 			
 			if (ledgerEntry.entryTID.equals("Basic")) {
-				ledgerEntry.entryType = utils.getPrimitiveFromEncodingType(ledgerEntry.entryType);
+				ledgerEntry.entryType = pathBuilderUtilities.getPrimitiveFromEncodingType(ledgerEntry.entryType);
 				nonBasicType = false;
 			}
 			else {

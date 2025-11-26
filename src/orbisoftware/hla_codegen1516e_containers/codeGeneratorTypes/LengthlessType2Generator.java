@@ -24,18 +24,18 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import orbisoftware.hla_codegen1516e_containers.Utilities;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.CodeGeneratorJava;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.LedgerEntry;
 import orbisoftware.hla_codegen1516e_containers.javaCodeGenerator.SharedResources.ElementType;
-import orbisoftware.hla_pathbuilder.Utils;
+import orbisoftware.hla_pathbuilder.PathBuilderUtilities;
+import orbisoftware.hla_shared.Utilities;
 
 // This array is of primitive type
 public class LengthlessType2Generator {
 
 	public static int indentSpace;
 
-	private Utils utils = new Utils();
+	private PathBuilderUtilities pathBuilderUtilities = new PathBuilderUtilities();
 
 	private LedgerEntry ledgerEntry;
 
@@ -104,7 +104,7 @@ public class LengthlessType2Generator {
 
 	public void printHeader(String elementClassname, ElementType elementType, LedgerEntry value) {
 
-		System.out.println("package " + Utilities.packageRoot + "Common.LengthlessArrays;");
+		System.out.println("package " + Utilities.containerPackageRoot + "Common.LengthlessArrays;");
 
 		System.out.println();
 
@@ -125,7 +125,7 @@ public class LengthlessType2Generator {
 		depthCurSpace();
 		
 		String nativeClass = ledgerEntry.entryClassType;
-		String variableName = utils.convertToCamelCase(nativeClass);
+		String variableName = pathBuilderUtilities.convertToCamelCase(nativeClass);
 		
 		System.out.println(indentFormat + "// Fields");
 		System.out.println(indentFormat + "public " + nativeClass + "_Cont[] value = new " + nativeClass + "_Cont[1];");
